@@ -6,13 +6,13 @@ var browserify = require('browserify');
 var React      = require('react');
 var babelify   = require('babelify');
 var app        = express();
-var MainView   = require('./app/components/index.jsx');
-var AppFlux    = require('./app/AppFlux');
+var MainView   = require('./shared/views/index.jsx');
+var AppFlux    = require('./shared/AppFlux');
 
 app.use('/bundle.js', function (req, res) {
   res.setHeader('content-type', 'application/javascript');
 
-  browserify('./client/app.js', {
+  browserify('./client/index.js', {
     debug:      true,
     extensions: ['.jsx', '.js']
   })
@@ -27,10 +27,15 @@ app.use('/', function (req, res) {
   res.setHeader('Content-Type', 'text/html');
 
   res.end(
-    React.renderToString(React.createElement(MainView, { flux: flux }))
+    '<div id="react-view">' +
+      React.renderToString(React.createElement(MainView, { flux: flux })) +
+    '</div>' +
+    '<script type="application/javascript" src="/bundle.js"></script>'
   );
 });
 
 var server = app.listen(3000, function() {
   console.log('Listening on 3000');
 });
+
+module.exports = server;
