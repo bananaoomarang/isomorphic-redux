@@ -12,7 +12,7 @@ var AppFlux    = require('./shared/AppFlux');
 app.use('/bundle.js', function (req, res) {
   res.setHeader('content-type', 'application/javascript');
 
-  browserify('./client/index.js', {
+  browserify('./client', {
     debug:      true,
     extensions: ['.jsx', '.js']
   })
@@ -29,9 +29,8 @@ app.use('/', function (req, res) {
   res.end(
     '<div id="react-view">' +
        React.renderToString(React.createElement(MainView, { flux: flux })) +
-    '</div>' +
+    '</div>'
 
-    '<script type="application/javascript" src="/bundle.js"></script>'
   );
 });
 

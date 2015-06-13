@@ -6,9 +6,9 @@ class MessageList extends React.Component {
   constructor(props) {
     super(props);
 
-    // I dislike this alot, but such are the costs of early adoption
-    this.handleDelete     = this.handleDelete.bind(this);
-    this.handleEdit       = this.handleEdit.bind(this);
+    // I dislike this a lot, but such are the costs of early adoption
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit   = this.handleEdit.bind(this);
   }
 
   handleDelete(e) {
@@ -20,10 +20,11 @@ class MessageList extends React.Component {
   }
 
   handleEdit(e) {
-    const id = Number(e.target.dataset.id);
+    const id         = Number(e.target.dataset.id);
+    const currentVal = this.props.messages.get(id).text;
 
     // For a cutting edge UX
-    let text = window.prompt();
+    let text = window.prompt('', currentVal);
 
     this.context.flux
       .getActions('messages')
@@ -57,6 +58,8 @@ MessageList.propTypes = {
   messages: React.PropTypes.instanceOf(Immutable.List).isRequired
 };
 
+// Despite the fact we check at the top of the chain, this is necessary.
+// If unspecified this.context.flux will not exist
 MessageList.contextTypes = {
   flux: React.PropTypes.instanceOf(AppFlux).isRequired
 };
