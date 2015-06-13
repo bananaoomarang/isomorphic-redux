@@ -5,7 +5,19 @@ class MessageActions extends Actions {
     return {
       text: msg,
       date: Date.now()
-    }
+    };
+  }
+
+  editMessage(id, text) {
+    return {
+      id,
+      text,
+      date: Date.now()
+    };
+  }
+
+  deleteMessage(id) {
+    return id;
   }
 }
 

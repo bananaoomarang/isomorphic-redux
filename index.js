@@ -28,8 +28,9 @@ app.use('/', function (req, res) {
 
   res.end(
     '<div id="react-view">' +
-      React.renderToString(React.createElement(MainView, { flux: flux })) +
+       React.renderToString(React.createElement(MainView, { flux: flux })) +
     '</div>' +
+
     '<script type="application/javascript" src="/bundle.js"></script>'
   );
 });

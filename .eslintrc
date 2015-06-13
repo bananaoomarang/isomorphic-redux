@@ -4,6 +4,7 @@
   ],
   "env": {
     "node": true,
+    "browser": true,
     "es6": true
   },
   "ecmaFeatures": {
@@ -19,6 +20,7 @@
     "no-warning-comments": 0,
     "curly": 0,
     "no-multi-spaces": 0,
+    "no-alert": 0,
 
     // Warnings
     "no-debugger": 1,
