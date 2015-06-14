@@ -1,19 +1,13 @@
 import React from 'react';
 
-class MessageForm extends React.Component {
-  constructor() {
-    super();
-
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-  }
-
+var MessageForm = {
   handleFormSubmit() {
     var msg = this.refs['message-input'].getDOMNode().value;
 
     this.props.flux.getActions('messages').createMessage(msg);
 
     this.refs['message-input'].getDOMNode().value = '';
-  }
+  },
 
   render() {
     return (
@@ -25,4 +19,4 @@ class MessageForm extends React.Component {
   }
 }
 
-export default MessageForm;
+export default React.createClass(MessageForm);

@@ -1,15 +1,24 @@
 import React from 'react';
+import connectToStores from 'flummox/connect';
 import Immutable from 'immutable';
-import AppFlux from '../../AppFlux';
+import AppFlux from '../AppFlux';
 
-class MessageList extends React.Component {
-  constructor(props) {
-    super(props);
+var stores = {
+  messages: store => ({
+    messages: store.getMessages()
+  })
+};
 
-    // I dislike this a lot, but such are the costs of early adoption
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleEdit   = this.handleEdit.bind(this);
-  }
+var MessageView = {
+  propTypes: {
+    messages: React.PropTypes.instanceOf(Immutable.List).isRequired
+  },
+
+  // Despite the fact we check at the top of the chain, this is necessary.
+  // If unspecified this.context.flux will not exist
+  contextTypes: {
+    flux: React.PropTypes.instanceOf(AppFlux).isRequired
+  },
 
   handleDelete(e) {
     const id = Number(e.target.dataset.id);
@@ -17,7 +26,7 @@ class MessageList extends React.Component {
     this.context.flux
       .getActions('messages')
       .deleteMessage(id);
-  }
+  },
 
   handleEdit(e) {
     const id         = Number(e.target.dataset.id);
@@ -29,7 +38,7 @@ class MessageList extends React.Component {
     this.context.flux
       .getActions('messages')
       .editMessage(id, text);
-  }
+  },
 
   render() {
     const btnStyle = {
@@ -52,16 +61,9 @@ class MessageList extends React.Component {
       </div>
     );
   }
-}
-
-MessageList.propTypes = {
-  messages: React.PropTypes.instanceOf(Immutable.List).isRequired
 };
 
-// Despite the fact we check at the top of the chain, this is necessary.
-// If unspecified this.context.flux will not exist
-MessageList.contextTypes = {
-  flux: React.PropTypes.instanceOf(AppFlux).isRequired
-};
-
-export default MessageList;
+export default connectToStores(
+  React.createClass(MessageView),
+  stores
+);

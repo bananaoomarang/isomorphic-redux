@@ -1,10 +1,14 @@
 import React from 'react';
 import FluxComponent from 'flummox/component';
 import AppFlux from '../AppFlux';
-import MessageView from './Messages';
+import MessageView from './MessageView';
 import MessageForm from './MessageForm';
 
-class AppView extends React.Component {
+var AppView = {
+  propTypes: {
+    flux: React.PropTypes.instanceOf(AppFlux).isRequired
+  },
+
   render() {
     return (
       <div>
@@ -28,8 +32,4 @@ class AppView extends React.Component {
   }
 }
 
-AppView.propTypes = {
-  flux: React.PropTypes.instanceOf(AppFlux).isRequired
-};
-
-export default AppView;
+export default React.createClass(AppView);
