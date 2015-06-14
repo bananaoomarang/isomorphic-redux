@@ -12,9 +12,11 @@
     "babel": "^5.5.6",
     "babelify": "^6.1.2",
     "browserify": "^10.2.4",
+    "browserify-middleware": "^5.0.2",
     "express": "^4.12.4",
     "flummox": "^3.5.2",
     "immutable": "^3.7.3",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "react-router": "^0.13.3"
   }
 }

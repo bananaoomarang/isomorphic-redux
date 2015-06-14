@@ -2,24 +2,20 @@
 require('babel/register');
 
 var express    = require('express');
-var browserify = require('browserify');
+var browserify = require('browserify-middleware');
 var React      = require('react');
 var babelify   = require('babelify');
 var app        = express();
 var MainView   = require('./shared/views/index.jsx');
 var AppFlux    = require('./shared/AppFlux');
 
-app.use('/bundle.js', function (req, res) {
-  res.setHeader('content-type', 'application/javascript');
+var browserifyOpts = {
+  debug:      true,
+  extensions: ['.jsx', '.js'],
+  transform:  [babelify]
+};
 
-  browserify('./client', {
-    debug:      true,
-    extensions: ['.jsx', '.js']
-  })
-  .transform(babelify)
-  .bundle()
-  .pipe(res);
-});
+app.use('/bundle.js', browserify('./client/index.jsx', browserifyOpts))
 
 app.use('/', function (req, res) {
   const flux = new AppFlux();

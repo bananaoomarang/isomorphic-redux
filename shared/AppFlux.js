@@ -1,6 +1,6 @@
-import Flux from 'flummox';
+import Flux           from 'flummox';
 import MessageActions from './actions/MessageActions';
-import MessageStore from './stores/MessageStore';
+import MessageStore   from './stores/MessageStore';
 
 class AppFlux extends Flux {
   constructor() {

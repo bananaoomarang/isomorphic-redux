@@ -1,8 +1,8 @@
-import React from 'react';
+import React         from 'react';
 import FluxComponent from 'flummox/component';
-import AppFlux from '../AppFlux';
-import MessageView from './MessageView';
-import MessageForm from './MessageForm';
+import AppFlux       from '../AppFlux';
+import MessageView   from './MessageView';
+import MessageForm   from './MessageForm';
 
 var AppView = {
   propTypes: {

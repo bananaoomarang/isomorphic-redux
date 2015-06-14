@@ -1,7 +1,7 @@
-import React from 'react';
+import React           from 'react';
 import connectToStores from 'flummox/connect';
-import Immutable from 'immutable';
-import AppFlux from '../AppFlux';
+import Immutable       from 'immutable';
+import AppFlux         from '../AppFlux';
 
 var stores = {
   messages: store => ({
