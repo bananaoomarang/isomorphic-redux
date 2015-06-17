@@ -1,10 +1,15 @@
-import React from 'react';
+import React   from 'react';
+import AppFlux from '../AppFlux';
 
 var MessageForm = {
+  contextTypes: {
+    flux: React.PropTypes.instanceOf(AppFlux)
+  },
+
   handleFormSubmit() {
     var msg = this.refs['message-input'].getDOMNode().value;
 
-    this.props.flux.getActions('messages').createMessage(msg);
+    this.context.flux.getActions('messages').createMessage(msg);
 
     this.refs['message-input'].getDOMNode().value = '';
   },
@@ -17,6 +22,6 @@ var MessageForm = {
       </div>
     );
   }
-}
+};
 
 export default React.createClass(MessageForm);

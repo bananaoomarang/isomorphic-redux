@@ -1,13 +1,15 @@
 'use strict';
 require('babel/register');
 
-var express    = require('express');
-var browserify = require('browserify-middleware');
-var React      = require('react');
-var babelify   = require('babelify');
-var app        = express();
-var MainView   = require('./shared/views/index.jsx');
-var AppFlux    = require('./shared/AppFlux');
+var express       = require('express');
+var browserify    = require('browserify-middleware');
+var React         = require('react');
+var Router        = require('react-router');
+var babelify      = require('babelify');
+var routes        = require('./shared/routes');
+var AppFlux       = require('./shared/AppFlux');
+var FluxComponent = require('flummox/component');
+var app           = express();
 
 var browserifyOpts = {
   debug:      true,
@@ -15,19 +17,26 @@ var browserifyOpts = {
   transform:  [babelify]
 };
 
-app.use('/bundle.js', browserify('./client/index.jsx', browserifyOpts))
+app.use('/bundle.js', browserify('./client/index.jsx', browserifyOpts));
 
-app.use('/', function (req, res) {
+app.use(function (req, res, next) {
   const flux = new AppFlux();
 
-  res.setHeader('Content-Type', 'text/html');
+  let path = req.path;
 
-  res.end(
-    '<div id="react-view">' +
-       React.renderToString(React.createElement(MainView, { flux: flux })) +
-    '</div>'
+  Router.run(routes, path, function (Handler, state) {
+    var View = (
+      React.createElement(FluxComponent, {flux: flux},
+        React.createElement(Handler, React.__spread(state))
+      )
+    );
 
-  );
+    var html = React.renderToString(View);
+
+    res.end(html);
+
+    next();
+  });
 });
 
 var server = app.listen(3000, function() {
