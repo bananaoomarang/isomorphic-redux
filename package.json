@@ -18,5 +18,9 @@
     "immutable": "^3.7.3",
     "react": "^0.13.3",
     "react-router": "^0.13.3"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.7.12",
+    "gulp": "^3.9.0"
   }
 }

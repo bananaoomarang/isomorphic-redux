@@ -3,7 +3,7 @@ import AppFlux from '../AppFlux';
 
 var MessageForm = {
   contextTypes: {
-    flux: React.PropTypes.instanceOf(AppFlux)
+    flux: React.PropTypes.instanceOf(AppFlux).isRequired
   },
 
   handleFormSubmit() {

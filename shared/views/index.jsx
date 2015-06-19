@@ -10,6 +10,7 @@ var AppView = {
   render() {
     return (
       <div>
+
         <title>Flummox Demo</title>
 
         <RouteHandler {...this.props} />

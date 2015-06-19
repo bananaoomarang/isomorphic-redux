@@ -26,10 +26,22 @@ app.use(function (req, res, next) {
 
   Router.run(routes, path, function (Handler, state) {
     var View = (
-      React.createElement(FluxComponent, {flux: flux},
-        React.createElement(Handler, React.__spread(state))
-      )
+
+      React.createElement("html", null, 
+        React.createElement("head", null, 
+          React.createElement("meta", {charset: "utf-8"}), 
+          React.createElement("title", null, "Flux Demo")
+       ), 
+
+       React.createElement("body", null, 
+         React.createElement(FluxComponent, {flux: flux}, 
+            React.createElement(Handler, React.__spread({},  state))
+         )
+       )
+     )
+
     );
+
 
     var html = React.renderToString(View);
 
@@ -39,8 +51,4 @@ app.use(function (req, res, next) {
   });
 });
 
-var server = app.listen(3000, function() {
-  console.log('Listening on 3000');
-});
-
-module.exports = server;
+module.exports = app;

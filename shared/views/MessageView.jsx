@@ -14,8 +14,6 @@ var MessageView = {
     messages: React.PropTypes.instanceOf(Immutable.List).isRequired
   },
 
-  // Despite the fact we check at the top of the chain, this is necessary.
-  // If unspecified this.context.flux will not exist
   contextTypes: {
     flux: React.PropTypes.instanceOf(AppFlux).isRequired
   },
