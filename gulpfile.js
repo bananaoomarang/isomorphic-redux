@@ -1,11 +1,11 @@
 'use strict';
+require('babel/register');
 
 var gulp        = require('gulp');
 var browserSync = require('browser-sync').create();
-var server      = require('./index');
+var server      = require('./server');
 
 const PORT  = 3000;
-const PATHS = ['shared/**', 'client/**'];
 
 gulp.task('serve', function (done) {
 
@@ -16,15 +16,15 @@ gulp.task('serve', function (done) {
 });
 
 gulp.task('browserSync', ['serve'], function () {
-  const opts = {
+  const OPTS = {
     proxy: 'http://localhost:' + PORT
   };
 
-  browserSync.init(opts);
+  browserSync.init(OPTS);
 });
 
 gulp.task('watch', function () {
-  gulp.watch(PATHS, browserSync.reload);
+  gulp.watch(['shared/**', 'client/**'], browserSync.reload);
 });
 
 gulp.task('default', ['serve', 'browserSync', 'watch']);
