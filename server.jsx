@@ -1,41 +1,25 @@
-var express       = require('express');
-var browserify    = require('browserify-middleware');
-var React         = require('react');
-var Router        = require('react-router');
-var babelify      = require('babelify');
-var routes        = require('./shared/routes');
-var AppFlux       = require('./shared/AppFlux');
-var FluxComponent = require('flummox/component');
-var app           = express();
+import express         from 'express';
+import React           from 'react';
+import Router          from 'react-router';
+import routes          from './shared/routes';
+import { createRedux } from 'redux';
+import { Provider }    from 'redux/react';
+import * as stores     from './shared/stores';
 
-const BROWSERIFY_OPTS = {
-  debug:      true,
-  extensions: ['.jsx', '.js'],
-  transform:  [babelify],
-  precompile: true
-};
-
-app.use('/bundle.js', browserify('./client/index.jsx', BROWSERIFY_OPTS));
+var app = express();
 
 app.use(function (req, res, next) {
-  const flux = new AppFlux();
+  const redux = createRedux(stores);
 
   let path = req.path;
 
   Router.run(routes, path, function (Handler, state) {
     var View = (
-      <html>
-        <head>
-          <meta charset="utf-8" />
-          <title>Flummox Demo</title>
-        </head>
-
-        <body>
-          <FluxComponent flux={flux}>
-            <Handler {...state} />
-          </FluxComponent>
-        </body>
-      </html>
+          <Provider redux={redux}>
+            {() =>
+              <Handler {...state} />
+            }
+          </Provider>
     );
 
     var html = React.renderToString(View);

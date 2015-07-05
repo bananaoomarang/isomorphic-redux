@@ -1,17 +1,12 @@
 import React             from 'react';
-import AppFlux           from '../AppFlux';
 import { RouteHandler }  from 'react-router';
 
-var AppView = {
-  contextTypes: {
-    flux: React.PropTypes.instanceOf(AppFlux)
-  },
-
+class AppView extends React.Component {
   render() {
     return (
       <div>
 
-        <title>Flummox Demo</title>
+        <title>Redux Demo</title>
 
         <RouteHandler {...this.props} />
 
@@ -19,6 +14,6 @@ var AppView = {
       </div>
     );
   }
-};
+}
 
-export default React.createClass(AppView);
+export default AppView;

@@ -1,18 +1,17 @@
-import React   from 'react';
-import AppFlux from '../AppFlux';
+import React, { PropTypes } from 'react';
 
-var MessageForm = {
-  contextTypes: {
-    flux: React.PropTypes.instanceOf(AppFlux).isRequired
-  },
+class MessageForm extends React.Component {
+  static propTypes = {
+    createMessage: PropTypes.func.isRequired
+  }
 
-  handleFormSubmit() {
-    var msg = this.refs['message-input'].getDOMNode().value;
+  handleFormSubmit = () => {
+    let node = this.refs['message-input'].getDOMNode();
 
-    this.context.flux.getActions('messages').createMessage(msg);
+    this.props.createMessage(node.value);
 
-    this.refs['message-input'].getDOMNode().value = '';
-  },
+    node.value = '';
+  }
 
   render() {
     return (
@@ -22,6 +21,6 @@ var MessageForm = {
       </div>
     );
   }
-};
+}
 
-export default React.createClass(MessageForm);
+export default MessageForm;

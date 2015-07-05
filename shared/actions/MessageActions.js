@@ -1,24 +1,25 @@
-import { Actions } from 'flummox';
+import { CREATE_MSG, EDIT_MSG, DELETE_MSG } from '../constants/actions';
 
-class MessageActions extends Actions {
-  createMessage(msg) {
-    return {
-      text: msg,
-      date: Date.now()
-    };
-  }
-
-  editMessage(id, text) {
-    return {
-      id,
-      text,
-      date: Date.now()
-    };
-  }
-
-  deleteMessage(id) {
-    return id;
-  }
+export function createMessage(msg) {
+  return {
+    type: CREATE_MSG,
+    text: msg,
+    date: Date.now()
+  };
 }
 
-export default MessageActions;
+export function editMessage(id, text) {
+  return {
+    type: EDIT_MSG,
+    id,
+    text,
+    date: Date.now()
+  };
+}
+
+export function deleteMessage(id) {
+  return {
+    type: DELETE_MSG,
+    id
+  };
+}

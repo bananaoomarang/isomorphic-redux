@@ -1,5 +1,10 @@
 'use strict';
-require('babel/register');
+
+const OPTS = {
+  optional: ['es7.decorators']
+};
+
+require('babel/register')(OPTS);
 
 var server = require('./server');
 

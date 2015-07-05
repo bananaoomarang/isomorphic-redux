@@ -1,43 +1,17 @@
-import { Store } from 'flummox';
 import Immutable from 'immutable';
+import { CREATE_MSG, EDIT_MSG, DELETE_MSG } from '../constants/actions';
 
-class MessageStore extends Store {
-  constructor(flux) {
-    super();
+let defaultState = new Immutable.List();
 
-    const msgActionIds = flux.getActionIds('messages');
-    this.register(msgActionIds.createMessage, this.handleNewMessage);
-    this.register(msgActionIds.deleteMessage, this.handleDeleteMessage);
-    this.register(msgActionIds.editMessage,   this.handleEditMessage);
-
-    this.state = {
-      messages: new Immutable.List()
-    };
-  }
-
-  handleNewMessage(msg) {
-    msg.editing = false;
-
-    this.setState({
-      messages: this.state.messages.concat(msg)
-    });
-  }
-
-  handleEditMessage(msg) {
-    this.setState({
-      messages: this.state.messages.set(msg.id, msg)
-    });
-  }
-
-  handleDeleteMessage(id) {
-    this.setState({
-      messages: this.state.messages.delete(id)
-    });
-  }
-
-  getMessages() {
-    return this.state.messages;
+export default function messageStore(state = defaultState, action) {
+  switch(action.type) {
+    case CREATE_MSG:
+      return state.concat(action);
+    case EDIT_MSG:
+      return state.set(action.id, action);
+    case DELETE_MSG:
+      return state.delete(action.id);
+    default:
+      return state;
   }
 }
-
-export default MessageStore;

@@ -2,6 +2,7 @@
   "plugins": [
     "react"
   ],
+  "parser": "babel-eslint",
   "env": {
     "node": true,
     "browser": true,
@@ -9,7 +10,8 @@
   },
   "ecmaFeatures": {
     "jsx": true,
-    "modules": true
+    "modules": true,
+    "decorators": true
   },
   "rules": {
     // Ignore Rules

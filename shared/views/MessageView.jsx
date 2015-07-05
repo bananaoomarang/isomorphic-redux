@@ -1,30 +1,19 @@
-import React           from 'react';
-import connectToStores from 'flummox/connect';
-import Immutable       from 'immutable';
-import AppFlux         from '../AppFlux';
+import React         from 'react';
+import { PropTypes } from 'react';
+import Immutable     from 'immutable';
 
-var stores = {
-  messages: store => ({
-    messages: store.getMessages()
-  })
-};
-
-var MessageView = {
-  propTypes: {
-    messages: React.PropTypes.instanceOf(Immutable.List).isRequired
-  },
-
-  contextTypes: {
-    flux: React.PropTypes.instanceOf(AppFlux).isRequired
-  },
+class MessageView extends React.Component {
+  static propTypes = {
+    messages:      PropTypes.instanceOf(Immutable.List).isRequired,
+    editMessage:   PropTypes.func.isRequired,
+    deleteMessage: PropTypes.func.isRequired
+  }
 
   handleDelete(e) {
     const id = Number(e.target.dataset.id);
 
-    this.context.flux
-      .getActions('messages')
-      .deleteMessage(id);
-  },
+    this.props.deleteMessage(id);
+  }
 
   handleEdit(e) {
     const id         = Number(e.target.dataset.id);
@@ -33,10 +22,8 @@ var MessageView = {
     // For a cutting edge UX
     let text = window.prompt('', currentVal);
 
-    this.context.flux
-      .getActions('messages')
-      .editMessage(id, text);
-  },
+    this.props.editMessage(id, text);
+  }
 
   render() {
     const btnStyle = {
@@ -59,9 +46,6 @@ var MessageView = {
       </div>
     );
   }
-};
+}
 
-export default connectToStores(
-  React.createClass(MessageView),
-  stores
-);
+export default MessageView;
