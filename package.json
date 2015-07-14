@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":  "NODE_PATH=$NODE_PATH:./shared node .",
-    "dev":    "npm run start & webpack-dev-server --progress --color",
-    "lint":   "eslint shared shared/views/*.jsx shared/routes.jsx",
-    "test":   "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_PATH=$NODE_PATH:./shared node .",
+    "dev": "npm run start & webpack-dev-server --progress --color",
+    "lint": "eslint shared shared/views/*.jsx shared/routes.jsx",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Milo Mordaunt <milomord@gmail.com>",
   "license": "MIT",
@@ -15,9 +15,11 @@
     "babel": "^5.6.14",
     "express": "^4.13.0",
     "immutable": "^3.7.4",
+    "object-assign": "^3.0.0",
     "react": "^0.13.3",
-    "react-router": "^0.13.3",
-    "redux": "^0.12.0"
+    "react-redux": "^0.2.1",
+    "react-router": "^1.0.0-beta3",
+    "redux": "^1.0.0-rc"
   },
   "devDependencies": {
     "babel-eslint": "^3.1.20",

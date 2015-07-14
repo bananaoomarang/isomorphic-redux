@@ -9,13 +9,13 @@ class MessageView extends React.Component {
     deleteMessage: PropTypes.func.isRequired
   }
 
-  handleDelete(e) {
+  handleDelete = (e) => {
     const id = Number(e.target.dataset.id);
 
     this.props.deleteMessage(id);
   }
 
-  handleEdit(e) {
+  handleEdit = (e) => {
     const id         = Number(e.target.dataset.id);
     const currentVal = this.props.messages.get(id).text;
 

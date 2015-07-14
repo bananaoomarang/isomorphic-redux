@@ -1,20 +1,23 @@
-import React           from 'react';
-import Router          from 'react-router';
-import { createRedux } from 'redux';
-import { Provider }    from 'redux/react';
-import routes          from '../shared/routes';
-import * as stores from '../shared/stores';
+import React                            from 'react';
+import { Router }                       from 'react-router';
+import { history }                      from 'react-router/lib/BrowserHistory';
+import { createStore, combineReducers } from 'redux';
+import { Provider }                     from 'react-redux';
+import * as reducers                    from '../shared/reducers';
+import routes                           from '../shared/routes';
+import  immutifyState                   from 'lib/immutifyState';
 
-const redux = createRedux(stores);
+const initialState = immutifyState(window.__INITIAL_DATA__);
 
-Router.run(routes, function (Handler, state) {
-  React.render(
-    <Provider redux={redux}>
-      {() =>
-        <Handler {...state} />
-      }
-    </Provider>,
-    document.body
-  );
-});
+const reducer = combineReducers(reducers);
+const store   = createStore(reducer, initialState);
+
+React.render(
+  <Provider store={store}>
+    {() =>
+      <Router children={routes} history={history} />
+    }
+  </Provider>,
+  document.getElementById('react-view')
+);
 

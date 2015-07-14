@@ -1,30 +1,52 @@
-import express         from 'express';
-import React           from 'react';
-import Router          from 'react-router';
-import routes          from './shared/routes';
-import { createRedux } from 'redux';
-import { Provider }    from 'redux/react';
-import * as stores     from './shared/stores';
+import express                          from 'express';
+import React                            from 'react';
+import { Router }                       from 'react-router';
+import Location                         from 'react-router/lib/Location';
+import routes                           from './shared/routes';
+import { createStore, combineReducers } from 'redux';
+import { Provider }                     from 'react-redux';
+import * as reducers                    from './shared/reducers';
 
 var app = express();
 
 app.use(function (req, res, next) {
-  const redux = createRedux(stores);
+  const location = new Location(req.path, req.query);
+  const reducer  = combineReducers(reducers);
+  const store    = createStore(reducer);
 
-  let path = req.path;
+  Router.run(routes, location, function (err, initialState) {
+    if(err) return console.error(err);
 
-  Router.run(routes, path, function (Handler, state) {
-    var View = (
-          <Provider redux={redux}>
+    const InitialView = (
+          <Provider store={store}>
             {() =>
-              <Handler {...state} />
+              <Router {...initialState} />
             }
           </Provider>
     );
 
-    var html = React.renderToString(View);
+    const routerHTML = React.renderToString(InitialView);
 
-    res.end(html);
+    const initialData = store.getState();
+
+    const HTML = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <title>Chapters</title>
+
+        <script>
+          window.__INITIAL_DATA__ = ${JSON.stringify(initialData)};
+        </script>
+      </head>
+      <body>
+        <div id="react-view">${routerHTML}</div>
+      </body>
+    </html>
+    `;
+
+    res.end(HTML);
 
     next();
   });
