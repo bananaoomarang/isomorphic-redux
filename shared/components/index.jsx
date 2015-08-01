@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 
-class AppView extends React.Component {
+export default class MainView extends React.Component {
   static contextTypes = {
     router: PropTypes.object.isRequired
   }
 
   static propTypes = {
-    children: PropTypes.object.isRequired
+    children: PropTypes.object
   }
 
   componentDidMount = () => {
@@ -26,5 +26,3 @@ class AppView extends React.Component {
     );
   }
 }
-
-export default AppView;

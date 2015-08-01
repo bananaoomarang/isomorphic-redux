@@ -2,10 +2,10 @@ import express                          from 'express';
 import React                            from 'react';
 import { Router }                       from 'react-router';
 import Location                         from 'react-router/lib/Location';
-import routes                           from './shared/routes';
+import routes                           from 'routes';
 import { createStore, combineReducers } from 'redux';
 import { Provider }                     from 'react-redux';
-import * as reducers                    from './shared/reducers';
+import * as reducers                    from 'reducers';
 
 var app = express();
 
