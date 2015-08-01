@@ -32,7 +32,7 @@ module.exports = {
   devServer: {
     hot: true,
     proxy: {
-      '*': 'http://localhost:3000'
+      '*': 'http://localhost:' + (process.env.PORT || 3000)
     }
   }
 };

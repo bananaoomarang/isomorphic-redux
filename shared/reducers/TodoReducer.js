@@ -2,13 +2,13 @@ import Immutable from 'immutable';
 
 let defaultState = new Immutable.List();
 
-export default function messageStore(state = defaultState, action) {
+export default function todoReducer(state = defaultState, action) {
   switch(action.type) {
-    case 'CREATE_MSG':
+    case 'CREATE_TODO':
       return state.concat(action);
-    case 'EDIT_MSG':
+    case 'EDIT_TODO':
       return state.set(action.id, action);
-    case 'DELETE_MSG':
+    case 'DELETE_TODO':
       return state.delete(action.id);
     default:
       return state;

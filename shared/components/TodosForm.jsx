@@ -2,13 +2,13 @@ import React, { PropTypes } from 'react';
 
 class MessageForm extends React.Component {
   static propTypes = {
-    createMessage: PropTypes.func.isRequired
+    createTodo: PropTypes.func.isRequired
   }
 
   handleFormSubmit = () => {
     let node = this.refs['message-input'].getDOMNode();
 
-    this.props.createMessage(node.value);
+    this.props.createTodo(node.value);
 
     node.value = '';
   }

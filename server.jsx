@@ -7,41 +7,42 @@ import { createStore, combineReducers } from 'redux';
 import { Provider }                     from 'react-redux';
 import * as reducers                    from 'reducers';
 
-var app = express();
+const app = express();
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   const location = new Location(req.path, req.query);
   const reducer  = combineReducers(reducers);
   const store    = createStore(reducer);
 
-  Router.run(routes, location, function (err, initialState) {
+  Router.run(routes, location, (err, routeState) => {
     if(err) return console.error(err);
 
     const InitialView = (
-          <Provider store={store}>
-            {() =>
-              <Router {...initialState} />
-            }
-          </Provider>
+      <Provider store={store}>
+        {() =>
+          <Router {...routeState} />
+        }
+      </Provider>
     );
 
-    const routerHTML = React.renderToString(InitialView);
+    const componentHTML = React.renderToString(InitialView);
 
-    const initialData = store.getState();
+    const initialState = store.getState();
 
     const HTML = `
     <!DOCTYPE html>
     <html>
       <head>
         <meta charset="utf-8">
-        <title>Chapters</title>
+        <title>Redux Demo</title>
 
         <script>
-          window.__INITIAL_DATA__ = ${JSON.stringify(initialData)};
+          window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
         </script>
       </head>
       <body>
-        <div id="react-view">${routerHTML}</div>
+        <div id="react-view">${componentHTML}</div>
+        <script type="application/javascript" src="/bundle.js"></script>
       </body>
     </html>
     `;
@@ -52,4 +53,4 @@ app.use(function (req, res, next) {
   });
 });
 
-module.exports = app;
+export default app;

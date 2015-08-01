@@ -7,7 +7,7 @@ import * as reducers                    from 'reducers';
 import routes                           from 'routes';
 import  immutifyState                   from 'lib/immutifyState';
 
-const initialState = immutifyState(window.__INITIAL_DATA__);
+const initialState = immutifyState(window.__INITIAL_STATE__);
 
 const reducer = combineReducers(reducers);
 const store   = createStore(reducer, initialState);

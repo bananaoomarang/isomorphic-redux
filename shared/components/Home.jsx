@@ -1,29 +1,27 @@
-import React, { PropTypes }    from 'react';
-import MessageView             from './MessageView';
-import MessageForm             from './MessageForm';
-import { bindActionCreators  } from 'redux';
-import * as MessageActions     from 'actions/MessageActions';
-import { connect }             from 'react-redux';
+import React, { PropTypes }   from 'react';
+import TodosView              from './TodosView';
+import TodosForm              from './TodosForm';
+import { bindActionCreators } from 'redux';
+import * as TodoActions       from 'actions/TodoActions';
+import { connect }            from 'react-redux';
 
 @connect(state => ({
-  messages: state.messages
+  todos: state.todos
 }))
 
 export default class Home extends React.Component {
   static propTypes = {
-    messages: PropTypes.any.isRequired,
+    todos:    PropTypes.any.isRequired,
     dispatch: PropTypes.func.isRequired
   }
 
   render() {
-    const { messages, dispatch } = this.props;
+    const { todos, dispatch } = this.props;
 
     return (
-      <div>
-        <h1>List:</h1>
-
-        <MessageView messages={messages} {...bindActionCreators(MessageActions, dispatch)} />
-        <MessageForm {...bindActionCreators(MessageActions, dispatch)}/>
+      <div id="todo-list">
+        <TodosView todos={todos} {...bindActionCreators(TodoActions, dispatch)} />
+        <TodosForm {...bindActionCreators(TodoActions, dispatch)}/>
       </div>
     );
   }

@@ -15,13 +15,12 @@ export default class MainView extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="main-view">
+        <h1>Todos</h1>
 
-        <title>Redux Demo</title>
+        <hr />
 
         {this.props.children}
-
-        <script type="application/javascript" src="/bundle.js"></script>
       </div>
     );
   }
