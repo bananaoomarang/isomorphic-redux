@@ -1,18 +1,21 @@
-import express                          from 'express';
-import React                            from 'react';
-import { Router }                       from 'react-router';
-import Location                         from 'react-router/lib/Location';
-import routes                           from 'routes';
-import { createStore, combineReducers } from 'redux';
-import { Provider }                     from 'react-redux';
-import * as reducers                    from 'reducers';
+import express             from 'express';
+import React               from 'react';
+import { Router }          from 'react-router';
+import Location            from 'react-router/lib/Location';
+import routes              from 'routes';
+import { Provider }        from 'react-redux';
+import * as reducers       from 'reducers';
+import promiseMiddleware   from 'lib/promiseMiddleware';
+import { createStore,
+         combineReducers,
+         applyMiddleware } from 'redux';
 
 const app = express();
 
-app.use((req, res, next) => {
+app.use( (req, res) => {
   const location = new Location(req.path, req.query);
   const reducer  = combineReducers(reducers);
-  const store    = createStore(reducer);
+  const store    = applyMiddleware(promiseMiddleware)(createStore)(reducer);
 
   Router.run(routes, location, (err, routeState) => {
     if(err) return console.error(err);
@@ -48,8 +51,6 @@ app.use((req, res, next) => {
     `;
 
     res.end(HTML);
-
-    next();
   });
 });
 

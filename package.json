@@ -10,6 +10,7 @@
   "author": "Milo Mordaunt <milomord@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.5.4",
     "express": "^4.13.2",
     "immutable": "^3.7.4",
     "object-assign": "^3.0.0",

@@ -1,16 +1,19 @@
-import React                            from 'react';
-import { Router }                       from 'react-router';
-import { history }                      from 'react-router/lib/BrowserHistory';
-import { createStore, combineReducers } from 'redux';
-import { Provider }                     from 'react-redux';
-import { fromJS }                       from 'immutable';
-import * as reducers                    from 'reducers';
-import routes                           from 'routes';
+import React               from 'react';
+import { Router }          from 'react-router';
+import { history }         from 'react-router/lib/BrowserHistory';
+import { Provider }        from 'react-redux';
+import { fromJS }          from 'immutable';
+import * as reducers       from 'reducers';
+import routes              from 'routes';
+import promiseMiddleware   from 'lib/promiseMiddleware';
+import { createStore,
+         combineReducers,
+         applyMiddleware } from 'redux';
 
 const initialState = fromJS(window.__INITIAL_STATE__);
 
 const reducer = combineReducers(reducers);
-const store   = createStore(reducer, initialState);
+const store   = applyMiddleware(promiseMiddleware)(createStore)(reducer, initialState);
 
 React.render(
   <Provider store={store}>

@@ -12,6 +12,10 @@ export default class Home extends React.Component {
     todos:    PropTypes.any.isRequired,
     dispatch: PropTypes.func.isRequired
   }
+  
+  componentDidMount = () => {
+    this.props.dispatch(TodoActions.getTodos());
+  }
 
   render() {
     const { todos, dispatch } = this.props;
