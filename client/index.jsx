@@ -6,11 +6,12 @@ import { fromJS }          from 'immutable';
 import * as reducers       from 'reducers';
 import routes              from 'routes';
 import promiseMiddleware   from 'lib/promiseMiddleware';
+import immutifyState       from 'lib/immutifyState';
 import { createStore,
          combineReducers,
          applyMiddleware } from 'redux';
 
-const initialState = fromJS(window.__INITIAL_STATE__);
+const initialState = immutifyState(window.__INITIAL_STATE__);
 
 const reducer = combineReducers(reducers);
 const store   = applyMiddleware(promiseMiddleware)(createStore)(reducer, initialState);
