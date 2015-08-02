@@ -2,7 +2,7 @@ import React         from 'react';
 import { PropTypes } from 'react';
 import Immutable     from 'immutable';
 
-class TodosView extends React.Component {
+export default class TodosView extends React.Component {
   static propTypes = {
     todos:         PropTypes.instanceOf(Immutable.List).isRequired,
     editTodo:   PropTypes.func.isRequired,
@@ -33,10 +33,10 @@ class TodosView extends React.Component {
     return (
       <div id="todos-list">
         {
-          this.props.todos.map(function (msg, index) {
+          this.props.todos.map(function (todo, index) {
             return (
               <div style={btnStyle} key={index}>
-                <span>{msg.text}</span>
+                <span>{todo}</span>
 
                 <button style={btnStyle} data-id={index} onClick={this.handleDelete}>X</button>
                 <button style={btnStyle} data-id={index} onClick={this.handleEdit}>Edit</button>
@@ -48,5 +48,3 @@ class TodosView extends React.Component {
     );
   }
 }
-
-export default TodosView;

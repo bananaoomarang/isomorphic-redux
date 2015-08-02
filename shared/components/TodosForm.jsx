@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 
-class MessageForm extends React.Component {
+export default class TodosForm extends React.Component {
   static propTypes = {
     createTodo: PropTypes.func.isRequired
   }
 
-  handleFormSubmit = () => {
-    let node = this.refs['message-input'].getDOMNode();
+  handleSubmit = () => {
+    let node = this.refs['todo-input'].getDOMNode();
 
     this.props.createTodo(node.value);
 
@@ -16,11 +16,9 @@ class MessageForm extends React.Component {
   render() {
     return (
       <div>
-        <input type="text" name="text" placeholder="type message" id="message-input" ref="message-input" />
-        <input type="submit" name="form-submit" value="OK!" onClick={this.handleFormSubmit} />
+        <input type="text" placeholder="type todo" ref="todo-input" />
+        <input type="submit" value="OK!" onClick={this.handleSubmit} />
       </div>
     );
   }
 }
-
-export default MessageForm;
