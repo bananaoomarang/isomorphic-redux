@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_PATH=$NODE_PATH:./shared node .",
+    "start": "NODE_PATH=$NODE_PATH:./shared node --harmony .",
     "dev": "npm run start & webpack-dev-server --progress --color"
   },
   "author": "Milo Mordaunt <milomord@gmail.com>",
