@@ -21,6 +21,8 @@ app.use( (req, res) => {
   Router.run(routes, location, (err, routeState) => {
     if(err) return console.error(err);
 
+    if(!routeState) return res.status(404).end('404');
+
     function renderView() {
       const InitialView = (
         <Provider store={store}>
@@ -55,11 +57,10 @@ app.use( (req, res) => {
       return HTML;
     }
 
-    if(routeState)
-      fetchComponentData(store.dispatch, routeState.components, routeState.params)
-        .then(renderView)
-        .then(html => res.end(html))
-        .catch(err => res.end(err.message));
+    fetchComponentData(store.dispatch, routeState.components, routeState.params)
+      .then(renderView)
+      .then(html => res.end(html))
+      .catch(err => res.end(err.message));
   });
 });
 
