@@ -14,7 +14,7 @@ module.exports = Object.assign(prodCfg, {
     loaders: [
       {
         test:    /\.jsx?$/,
-        exclude: __dirname + /node_modules/,
+        exclude: /node_modules/,
         loaders: ['react-hot', 'babel']
       }
     ]
