@@ -1,4 +1,4 @@
-## Isomorphic Flummox Demo
+## Isomorphic Redux Demo
 
 Basic isomorphic app built on [Redux](https://github.com/gaearon/redux)
 
