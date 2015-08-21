@@ -13,6 +13,13 @@ import { createStore,
 
 const app = express();
 
+
+// So the example quote unquote 'production mode' works
+import fs from 'fs';
+app.use('/bundle.js', function (req, res) {
+  return fs.createReadStream('./dist/bundle.js').pipe(res);
+});
+
 app.use( (req, res) => {
   const location = new Location(req.path, req.query);
   const reducer  = combineReducers(reducers);
