@@ -6,10 +6,14 @@ Object.assign = require('object-assign');
 
 module.exports = Object.assign(prodCfg, {
   entry:  [
-    'webpack-dev-server/client?http://localhost:8080/',
+    'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
     './client'
   ],
+  output: {
+      filename: 'bundle.js',
+      publicPath: 'http://localhost:8080/',
+  },
   module: {
     loaders: [
       {

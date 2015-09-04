@@ -1,3 +1,4 @@
+import fs                  from 'fs';
 import express             from 'express';
 import React               from 'react';
 import { Router }          from 'react-router';
@@ -13,12 +14,17 @@ import { createStore,
 
 const app = express();
 
+const isProduction = process.env.NODE_ENV === 'production';
 
 // So the example quote unquote 'production mode' works
-import fs from 'fs';
-app.use('/bundle.js', function (req, res) {
-  return fs.createReadStream('./dist/bundle.js').pipe(res);
-});
+if (isProduction) {
+  app.use('/bundle.js', function (req, res) {
+    return fs.createReadStream('./dist/bundle.js').pipe(res);
+  });
+}
+
+const bundlePath = isProduction ?
+  '/bundle.js' : 'http://localhost:8080/bundle.js'
 
 app.use( (req, res) => {
   const location = new Location(req.path, req.query);
@@ -56,7 +62,7 @@ app.use( (req, res) => {
         </head>
         <body>
           <div id="react-view">${componentHTML}</div>
-          <script type="application/javascript" src="/bundle.js"></script>
+          <script type="application/javascript" src="${bundlePath}"></script>
         </body>
       </html>
       `;
