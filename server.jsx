@@ -13,7 +13,6 @@ import { createStore,
 
 const app = express();
 
-
 // So the example quote unquote 'production mode' works
 import fs from 'fs';
 app.use('/bundle.js', function (req, res) {
@@ -26,10 +25,12 @@ app.use( (req, res) => {
   const store    = applyMiddleware(promiseMiddleware)(createStore)(reducer);
 
   match({ routes, location }, (err, redirectLocation, renderProps) => {
-    if(err)
-      return res.status(500).end(err.message);
+    if(err) {
+      console.error(err);
+      return res.status(500).end('Internal server error');
+    }
 
-    if(renderProps === null)
+    if(!renderProps)
       return res.status(404).end('Not found');
 
     function renderView() {
