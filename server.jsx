@@ -1,12 +1,12 @@
-import express             from 'express';
-import React               from 'react';
-import { Router }          from 'react-router';
-import Location            from 'react-router/lib/Location';
-import routes              from 'routes';
-import { Provider }        from 'react-redux';
-import * as reducers       from 'reducers';
-import promiseMiddleware   from 'lib/promiseMiddleware';
-import fetchComponentData  from 'lib/fetchComponentData';
+import express                   from 'express';
+import React                     from 'react';
+import { RoutingContext, match } from 'react-router';
+import createLocation            from 'history/lib/createLocation';
+import routes                    from 'routes';
+import { Provider }              from 'react-redux';
+import * as reducers             from 'reducers';
+import promiseMiddleware         from 'lib/promiseMiddleware';
+import fetchComponentData        from 'lib/fetchComponentData';
 import { createStore,
          combineReducers,
          applyMiddleware } from 'redux';
@@ -21,20 +21,22 @@ app.use('/bundle.js', function (req, res) {
 });
 
 app.use( (req, res) => {
-  const location = new Location(req.path, req.query);
+  const location = createLocation(req.url);
   const reducer  = combineReducers(reducers);
   const store    = applyMiddleware(promiseMiddleware)(createStore)(reducer);
 
-  Router.run(routes, location, (err, routeState) => {
-    if(err) return console.error(err);
+  match({ routes, location }, (err, redirectLocation, renderProps) => {
+    if(err)
+      return res.status(500).end(err.message);
 
-    if(!routeState) return res.status(404).end('404');
+    if(renderProps === null)
+      return res.status(404).end('Not found');
 
     function renderView() {
       const InitialView = (
         <Provider store={store}>
           {() =>
-            <Router {...routeState} />
+            <RoutingContext {...renderProps} />
           }
         </Provider>
       );
@@ -64,7 +66,7 @@ app.use( (req, res) => {
       return HTML;
     }
 
-    fetchComponentData(store.dispatch, routeState.components, routeState.params)
+    fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
       .then(renderView)
       .then(html => res.end(html))
       .catch(err => res.end(err.message));

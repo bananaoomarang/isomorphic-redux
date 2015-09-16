@@ -1,16 +1,12 @@
 import React, { PropTypes } from 'react';
 
 export default class MainView extends React.Component {
-  static contextTypes = {
-    router: PropTypes.object.isRequired
-  }
-
   static propTypes = {
     children: PropTypes.object
   }
 
   componentDidMount = () => {
-    this.context.router.transitionTo('home');
+    this.props.history.pushState(null, '/home');
   }
 
   render() {
