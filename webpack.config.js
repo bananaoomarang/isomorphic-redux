@@ -1,4 +1,3 @@
-var path      = require('path');
 var webpack   = require('webpack');
 var prodCfg   = require('./webpack.prod.config');
 
