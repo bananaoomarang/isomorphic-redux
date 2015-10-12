@@ -17,7 +17,7 @@ export default class TodosView extends React.Component {
 
   handleEdit = (e) => {
     const id         = Number(e.target.dataset.id);
-    const currentVal = this.props.todos.get(id).text;
+    const currentVal = this.props.todos.get(id);
 
     // For a cutting edge UX
     let text = window.prompt('', currentVal);
