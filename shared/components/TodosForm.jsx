@@ -6,7 +6,7 @@ export default class TodosForm extends React.Component {
   }
 
   handleSubmit = () => {
-    let node = this.refs['todo-input'].getDOMNode();
+    let node = this.refs['todo-input'];
 
     this.props.createTodo(node.value);
 
