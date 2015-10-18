@@ -1,5 +1,6 @@
 import express                   from 'express';
 import React                     from 'react';
+import { renderToString }        from 'react-dom/server'
 import { RoutingContext, match } from 'react-router';
 import createLocation            from 'history/lib/createLocation';
 import routes                    from 'routes';
@@ -36,13 +37,11 @@ app.use( (req, res) => {
     function renderView() {
       const InitialView = (
         <Provider store={store}>
-          {() =>
-            <RoutingContext {...renderProps} />
-          }
+          <RoutingContext {...renderProps} />
         </Provider>
       );
 
-      const componentHTML = React.renderToString(InitialView);
+      const componentHTML = renderToString(InitialView);
 
       const initialState = store.getState();
 
