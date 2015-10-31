@@ -10,15 +10,17 @@ import promiseMiddleware         from 'lib/promiseMiddleware';
 import fetchComponentData        from 'lib/fetchComponentData';
 import { createStore,
          combineReducers,
-         applyMiddleware } from 'redux';
+         applyMiddleware }       from 'redux';
+import path                      from 'path';
+import webpackDev                from './webpack.dev';
 
 const app = express();
 
-// So the example quote unquote 'production mode' works
-import fs from 'fs';
-app.use('/bundle.js', function (req, res) {
-  return fs.createReadStream('./dist/bundle.js').pipe(res);
-});
+if (process.env.NODE_ENV !== 'production') {
+  webpackDev(app);
+} else {
+  app.use(express.static(path.join(__dirname, 'dist')));
+}
 
 app.use( (req, res) => {
   const location = createLocation(req.url);
