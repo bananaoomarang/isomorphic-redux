@@ -4,8 +4,10 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import prodCfg              from './webpack.prod.config.js';
 
+Object.assign = assign;
+
 export default function(app) {
-  const config = assign(prodCfg, {
+  const config = Object.assign(prodCfg, {
     devtool: 'inline-source-map',
     entry:   [
       'webpack-hot-middleware/client',
@@ -42,6 +44,6 @@ export default function(app) {
 
   const compiler = webpack(config);
 
-  app.use(webpackDevMiddleware(compiler, {noInfo: true}));
+  app.use(webpackDevMiddleware(compiler, { noInfo: true }));
   app.use(webpackHotMiddleware(compiler));
 }
