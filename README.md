@@ -4,5 +4,5 @@ Basic isomorphic app built on [Redux](https://github.com/gaearon/redux)
 
 ```
 $ npm run dev
-$ browser http://localhost:8080
+$ browser http://localhost:3000
 ```
