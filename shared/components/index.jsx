@@ -3,11 +3,7 @@ import React, { PropTypes } from 'react';
 export default class MainView extends React.Component {
   static propTypes = {
     children: PropTypes.object
-  }
-
-  componentDidMount = () => {
-    this.props.history.pushState(null, '/home');
-  }
+  };
 
   render() {
     return (
