@@ -12,12 +12,11 @@ import { createStore,
          combineReducers,
          applyMiddleware }       from 'redux';
 import path                      from 'path';
-import webpackDev                from './webpack.dev';
 
 const app = express();
 
 if (process.env.NODE_ENV !== 'production') {
-  webpackDev(app);
+  require('./webpack.dev')(app);
 }
 
 app.use(express.static(path.join(__dirname, 'dist')));
