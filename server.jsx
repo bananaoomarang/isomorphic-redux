@@ -18,9 +18,9 @@ const app = express();
 
 if (process.env.NODE_ENV !== 'production') {
   webpackDev(app);
-} else {
-  app.use(express.static(path.join(__dirname, 'dist')));
 }
+
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use( (req, res) => {
   const location = createLocation(req.url);
