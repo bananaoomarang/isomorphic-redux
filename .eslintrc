@@ -37,7 +37,7 @@
     // Errors
     "no-undef": 2,
     "no-dupe-keys": 2,
-    "no-empty-class": 2,
+    "no-empty-character-class": 2,
     "no-self-compare": 2,
     "valid-typeof": 2,
     "no-unused-vars": 2,
@@ -49,14 +49,14 @@
     // stylistic errors
     "new-cap": 2,
     "no-spaced-func": 2,
-    "no-space-before-semi": 2,
+    "semi-spacing": 2,
     "quotes": [2, "single"],
     "key-spacing": [2, {
       "align": "value"
     }],
 
     // Plugin rules
-    "react/jsx-quotes": 1,
+    "jsx-quotes": 1,
     "react/jsx-no-undef": 1,
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1,
