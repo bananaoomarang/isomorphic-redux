@@ -12,15 +12,14 @@ import { createStore,
          combineReducers,
          applyMiddleware }       from 'redux';
 import path                      from 'path';
-import webpackDev                from './webpack.dev';
 
 const app = express();
 
 if (process.env.NODE_ENV !== 'production') {
-  webpackDev(app);
-} else {
-  app.use(express.static(path.join(__dirname, 'dist')));
+  require('./webpack.dev')(app);
 }
+
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use( (req, res) => {
   const location = createLocation(req.url);
