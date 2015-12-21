@@ -1,8 +1,8 @@
 'use strict';
 
-require('babel/register')({});
+require('babel-core/register')({});
 
-var server = require('./server');
+var server = require('./server').default;
 
 const PORT = process.env.PORT || 3000;
 
