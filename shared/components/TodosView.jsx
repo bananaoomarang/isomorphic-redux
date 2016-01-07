@@ -7,13 +7,13 @@ export default class TodosView extends React.Component {
     todos:         PropTypes.instanceOf(Immutable.List).isRequired,
     editTodo:   PropTypes.func.isRequired,
     deleteTodo: PropTypes.func.isRequired
-  }
+  };
 
   handleDelete = (e) => {
     const id = Number(e.target.dataset.id);
 
     this.props.deleteTodo(id);
-  }
+  };
 
   handleEdit = (e) => {
     const id         = Number(e.target.dataset.id);
@@ -23,7 +23,7 @@ export default class TodosView extends React.Component {
     let text = window.prompt('', currentVal);
 
     this.props.editTodo(id, text);
-  }
+  };
 
   render() {
     const btnStyle = {

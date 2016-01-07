@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 export default class TodosForm extends React.Component {
   static propTypes = {
     createTodo: PropTypes.func.isRequired
-  }
+  };
 
   handleSubmit = () => {
     let node = this.refs['todo-input'];
@@ -11,7 +11,7 @@ export default class TodosForm extends React.Component {
     this.props.createTodo(node.value);
 
     node.value = '';
-  }
+  };
 
   render() {
     return (

@@ -11,12 +11,12 @@ export default class Home extends React.Component {
   static propTypes = {
     todos:    PropTypes.any.isRequired,
     dispatch: PropTypes.func.isRequired
-  }
+  };
 
   static needs = [
     TodoActions.getTodos
-  ]
-  
+  ];
+
   render() {
     const { todos, dispatch } = this.props;
 
