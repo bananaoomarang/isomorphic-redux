@@ -7,7 +7,7 @@
   "scripts": {
     "start": "NODE_ENV=production NODE_PATH=$NODE_PATH:./shared node --harmony .",
     "dev": "NODE_PATH=$NODE_PATH:./shared node --harmony .",
-    "build": "NODE_ENV=production webpack --progress --color -p --config webpack.prod.config.js"
+    "build": "webpack --progress --color -p --config webpack.prod.config.js"
   },
   "author": "Milo Mordaunt <milomord@gmail.com>",
   "license": "MIT",
