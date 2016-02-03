@@ -1,6 +1,7 @@
 'use strict';
 
 require('babel-core/register')({});
+require('babel-polyfill');
 
 var server = require('./server').default;
 
