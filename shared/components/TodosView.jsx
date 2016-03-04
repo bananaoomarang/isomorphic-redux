@@ -33,7 +33,7 @@ export default class TodosView extends React.Component {
     return (
       <div id="todos-list">
         {
-          this.props.todos.map(function (todo, index) {
+          this.props.todos.map((todo, index) => {
             return (
               <div style={btnStyle} key={index}>
                 <span>{todo}</span>
@@ -42,7 +42,7 @@ export default class TodosView extends React.Component {
                 <button style={btnStyle} data-id={index} onClick={this.handleEdit}>Edit</button>
               </div>
             );
-          }.bind(this))
+          })
         }
       </div>
     );
