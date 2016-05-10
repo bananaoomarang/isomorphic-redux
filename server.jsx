@@ -31,6 +31,11 @@ app.use( (req, res) => {
       console.error(err);
       return res.status(500).end('Internal server error');
     }
+    
+    if (redirectLocation){
+      const location = redirectLocation.pathname + redirectLocation.search;
+      return res.redirect(302, location);
+    }
 
     if(!renderProps)
       return res.status(404).end('Not found');
