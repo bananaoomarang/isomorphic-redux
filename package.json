@@ -24,7 +24,7 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "express": "^4.13.3",
-    "history": "^1.17.0",
+    "history": "~1.13.1",
     "immutable": "^3.7.6",
     "object-assign": "^4.0.1",
     "react": "^0.14.3",
