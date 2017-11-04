@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 
 export default class MainView extends React.Component {
+  
+  // using React's type checking ... defining data types of the properties
   static propTypes = {
     children: PropTypes.object
   };

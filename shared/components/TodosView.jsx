@@ -3,6 +3,8 @@ import { PropTypes } from 'react';
 import Immutable     from 'immutable';
 
 export default class TodosView extends React.Component {
+
+  // using React's type checking ... defining data types of the properties
   static propTypes = {
     todos:         PropTypes.instanceOf(Immutable.List).isRequired,
     editTodo:   PropTypes.func.isRequired,
