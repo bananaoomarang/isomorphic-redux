@@ -8,3 +8,5 @@ How this app works is thoroughly explained in [Tutorial: Handcrafting an Isomorp
 $ npm run dev
 $ browser http://localhost:3000
 ```
+
+Code comments courtesy of: https://github.com/knee-cola
